@@ -44,15 +44,17 @@ void wrapwrap(int stck){
 
 */
 
-
+using namespace std;
 int main() {
     std::stack<std::string> args;
-	//adder myAdder(0.5);
-	//std::cout << myAdder(10., 5.) << std::endl;
+	adder myAdder(0.5);
+	std::cout << myAdder(10., 5.) << std::endl;
 	int num;
 	initFromString<int>("5", num);
 	std::cout << num << std::endl;
-	
+	std::cout << "myAdder: " << endl; 
+
+	//auto wMyAdder= wrap<float(float,float)>(myAdder);
 	auto wMyAdder= wrap<float(float,float)>(myAdder);
     args.push("17.5");
     args.push("42.25");

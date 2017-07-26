@@ -4,7 +4,7 @@
 unsigned int split(const std::string &txt, std::stack<std::string> &strs, char ch)
 {
     unsigned int pos = txt.find( ch );
-    unsigned int initialPos = 0;
+    unsigned long initialPos = 0;
     //strs.clear();
 
     // Decompose statement
@@ -16,7 +16,8 @@ unsigned int split(const std::string &txt, std::stack<std::string> &strs, char c
     }
 
     // Add the last one
-    strs.push( txt.substr( initialPos, std::min( pos, txt.size() ) - initialPos + 1 ) );
+	unsigned int txtSize= txt.size();
+    strs.push( txt.substr( initialPos, std::min( (unsigned int)pos, (unsigned int)txt.size() ) - initialPos + 1 ) );
 
     return strs.size();
 }

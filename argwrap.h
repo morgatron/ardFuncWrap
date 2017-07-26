@@ -43,7 +43,7 @@ typename std::decay<T>::type makeArg(std::stack<std::string>& args, bool& bSucce
 	if(!bSucceeded)
 		return rc;
     //if (args.empty() || !(std::istringstream(args.top()) >> rc)) {
-    if (args.empty() || ! initFromString(args.top(), rc)) {
+    if (args.empty() ||  initFromString(args.top(), rc)) {
         //throw std::runtime_error("can't create argument from '" + (args.empty()? "<empty>": args.top()) + "'");
 		bSucceeded=false;
     }
@@ -139,9 +139,12 @@ public:
 	//	std::stack<std::string> args;
 	//	split(argsStr, args, ' ');
         std::tuple<typename std::decay<A>::type...> t{ makeArg<A>(args)... };
-        std::ostringstream out;
-        out << util::apply([=](S& s, B... b){ return (s.*(this->mem))(b...); }, t);
-        return out.str();
+		auto output=util::apply([=](S& s, B... b){ return (s.*(this->mem))(b...); }, t);
+        //std::ostringstream out;
+        //out <<  output;
+		//std::string outStr=out.str();
+		std::string outStr=std::to_string(output);
+        return outStr;
     }
 };
 
